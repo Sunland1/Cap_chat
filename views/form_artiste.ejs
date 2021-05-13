@@ -1,0 +1,16 @@
+<% include header %>
+<body>
+<div class="container">
+    <form method="post" action="/artiste" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="indice" class="form-label h1">Indice</label>
+            <input name="indice" type="text" class="form-control" id="indice" placeholder="Ecrire l'indice de l'image">
+        </div>
+        <div class="input-group mb-3">
+            <input name="foo" type="file" class="form-control" id="inputGroupFile01">
+        </div>
+        <button class="btn btn-primary" type="submit">UPLOAD</button>
+    </form>
+</div>
+</body>
+<% include footer.ejs %>
