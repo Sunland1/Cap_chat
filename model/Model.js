@@ -156,6 +156,59 @@ class Model {
     }
 
 
+    //<---------------- Theme ------------------>
+    static getAllTheme(){
+        return new Promise((resolve,reject) => {
+            connection.query('SELECT * FROM Theme', (err,rows) => {
+                if(err) reject(err)
+                resolve(rows)
+            })
+        })
+    }
+
+    static getAllGameImageTheme(id){
+        return new Promise((resolve,reject) => {
+            connection.query('SELECT Theme.id_theme as id_theme,JI.id_jeux,Theme.nom as nom_theme,JI.nom as nom_jeux\n' +
+                'FROM Theme JOIN JeuxImage JI on Theme.id_theme = JI.id_theme WHERE Theme.id_theme=?',[id],
+                (err,rows) => {
+                    if(err) reject(err)
+                    resolve(rows)
+                }
+            )
+        })
+    }
+
+
+    static insertTheme(nom){
+        return new Promise((resolve,reject) => {
+            connection.query('INSERT INTO Theme (nom) VALUES (?)',[nom] ,(err,row) =>{
+                if(err || row === undefined) reject(err)
+                else resolve(row.insertId)
+            })
+        })
+    }
+
+    static updateTheme(id,nom){
+        return new Promise((resolve,reject) => {
+            connection.query('UPDATE Theme SET nom=? WHERE id_theme=?',[id,nom],
+                (err) => {
+                    if(err) reject(err)
+                    resolve()
+                }
+            )
+        })
+    }
+
+    static deleteTheme(id){
+        return new Promise((resolve,reject) => {
+            connection.query('DELETE Theme WHERE id_theme=?',[id],(err) => {
+                if(err) reject(err)
+                resolve()
+            })
+        })
+    }
+
+
 
 
 }

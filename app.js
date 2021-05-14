@@ -9,7 +9,8 @@ var fileUpload = require('express-fileupload')
 
 var indexRouter = require('./routes/index');
 var artisteRouter = require('./routes/artiste');
-var usersRoute = require('./routes/users')
+var usersRoute = require('./routes/users');
+var themeRouter = require('./routes/theme')
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/artiste' , artisteRouter)
 app.use('/users', usersRoute)
+app.use('/theme',themeRouter)
 
 
 // catch 404 and forward to error handler
