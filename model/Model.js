@@ -96,6 +96,66 @@ class Model {
     }
 
 
+    //<------------------ Artiste ------------------------------------>
+
+    static getAllArtiste(){
+        return new Promise((resolve,reject) => {
+            connection.query('SELECT * FROM Artiste' , (err,rows) => {
+                if(err) reject(err)
+                resolve(rows)
+            })
+        })
+    }
+
+
+    static getAllGameImageArtiste(id){
+        return new Promise((resolve,reject) => {
+            connection.query('SELECT id_jeux,id_theme,Artiste.nom as nom_artiste,pays,JI.nom as nom_jeux_image\n' +
+                'FROM Artiste JOIN JeuxImage JI on Artiste.id_artiste = JI.id_artiste WHERE Artiste.id_artiste=?',
+                [id],(err,rows) => {
+                    if(err) reject(err)
+                    resolve(rows)
+                }
+            )
+        })
+    }
+
+
+    static insertArtiste(name,country){
+        return new Promise((resolve,reject) => {
+            connection.query('INSERT INTO Artiste (nom,pays) VALUES (?,?)',[name,country],
+                (err,row) => {
+                    if(err || row === undefined) reject(err)
+                    else resolve(row.insertId)
+                }
+            )
+        })
+    }
+
+    static updateArtiste(id,data){
+        return new Promise((resolve,reject) => {
+            connection.query('UPDATE Artiste SET nom=?,pays=? WHERE id_artiste=?',[data.nom,data.pays,id],
+                (err) => {
+                    if(err) reject(err)
+                    resolve()
+                }
+            )
+        })
+    }
+
+
+    static deleteArtiste(id){
+        return new Promise((resolve,reject) => {
+            connection.query('DELETE FROM Artiste WHERE id_artiste=?',[id],
+                (err) => {
+                    if(err) reject(err)
+                    resolve()
+                }
+            )
+        })
+    }
+
+
 
 
 }

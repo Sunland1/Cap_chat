@@ -8,6 +8,9 @@ router.post('/register', ((req, res) => {
     let email = req.body.email
     let password = req.body.password
 
+    if(email === '' || password === '') return res.status(400).json({
+        err: "MISSING ARGUMENT"
+    })
     model.register(email, password).then((id) => {
         model.mailer(id, email)
         res.status(201).json({
