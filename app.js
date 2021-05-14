@@ -10,7 +10,9 @@ var fileUpload = require('express-fileupload')
 var indexRouter = require('./routes/index');
 var artisteRouter = require('./routes/artiste');
 var usersRoute = require('./routes/users');
-var themeRouter = require('./routes/theme')
+var themeRouter = require('./routes/theme');
+var gameImageRouter = require('./routes/game_image')
+var imageRouter = require('./routes/image')
 
 var app = express();
 
@@ -33,7 +35,8 @@ app.use('/', indexRouter);
 app.use('/artiste' , artisteRouter)
 app.use('/users', usersRoute)
 app.use('/theme',themeRouter)
-
+app.use('/gameImage', gameImageRouter)
+app.use('/image', imageRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

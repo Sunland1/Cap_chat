@@ -208,7 +208,48 @@ class Model {
         })
     }
 
+    //<---------------------- Jeux d'images ---------------------------->
 
+    static getAllGameImage(){
+        return new Promise((resolve,reject) => {
+            connection.query('SELECT * FROM JeuxImage',(err,rows) => {
+                if(err) reject(err)
+                resolve(rows)
+            })
+        })
+    }
+
+
+    static insertGameImage(id_theme,id_artiste,nom){
+        return new Promise((resolve,reject) => {
+            connection.query('INSERT INTO JeuxImage (id_theme,id_artiste,nom) VALUES (?,?,?)',[id_theme,id_artiste,nom],
+                (err) => {
+                    if(err) reject(err)
+                    resolve()
+                }
+            )
+        })
+    }
+
+    static updateGameImage(id,id_theme,id_artiste,nom){
+        return new Promise((resolve,reject) => {
+            connection.query("UPDATE JeuxImage SET id_theme=?,id_artiste=?,nom=? WHERE id_jeux=?",
+                [id_theme,id_artiste,nom,id],(err) => {
+                    if(err) reject(err)
+                    resolve()
+                }
+            )
+        })
+    }
+
+    static deleteGameImage(id){
+        return new Promise((resolve,reject) => {
+            connection.query("DELETE FROM JeuxImage WHERE id_jeux=?" , [id], (err) => {
+                if(err) reject(err)
+                resolve()
+            })
+        })
+    }
 
 
 }
