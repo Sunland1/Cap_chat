@@ -252,6 +252,64 @@ class Model {
     }
 
 
+    static getInfoPath(id_jeux){
+        return new Promise((resolve,reject) => {
+            connection.query('SELECT JeuxImage.nom as game_name,T.nom as theme_name ' +
+                'FROM JeuxImage JOIN Theme T on T.id_theme = JeuxImage.id_theme WHERE JeuxImage.id_jeux = ?',
+                [id_jeux],(err,row) => {
+                    if(err) reject(err)
+                    else if(row[0] === undefined) reject(Error("NO CONTENT"))
+                    else resolve(row[0].theme_name+"/"+row[0].game_name)
+                }
+            )
+        })
+    }
+
+
+    //<-------------------- Image Section ----------------------------------->
+    static insertNeutralImage(id_jeux,url,path){
+        return new Promise((resolve,reject) => {
+            connection.query('INSERT INTO ImageNeutre (id_jeux,url,path) VALUES (?,?,?)' , [id_jeux,url,path],
+                (err,row) => {
+                    if(err || row === undefined) reject(err)
+                    else resolve(row.insertId)
+                }
+            )
+        })
+    }
+
+
+    static deleteNeutralImage(id_neutre){
+        return new Promise((resolve,reject) => {
+            connection.query('DELETE FROM ImageNeutre WHERE id_neutre=?' , [id_neutre] , (err) => {
+                if(err) reject(err)
+                resolve()
+            })
+        })
+    }
+
+    static getNeutralImagePath(id_neutre){
+        return new Promise( (resolve,reject) => {
+            connection.query('SELECT path FROM ImageNeutre WHERE id_neutre=?',[id_neutre],(err,row) => {
+                if(err || row[0] === undefined) return reject(err)
+                resolve(row[0].path)
+            })
+        })
+    }
+
+
+    static insertSingImage(id_jeux,url,path,indice){
+        return new Promise((resolve,reject) => {
+            connection.query('INSERT INTO ImageSinguliere (id_jeux,indice,url,path) VALUES (?,?,?,?)',
+                [id_jeux,indice,url,path],(err,row) => {
+                    if(err) console.log(err)
+                    resolve(row)
+                }
+            )
+        })
+    }
+
+
 }
 
 

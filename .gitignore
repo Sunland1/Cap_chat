@@ -103,6 +103,8 @@ dist
 # TernJS port file
 .tern-port
 
+#Fichier Theme
+./public/images/Theme
 
 #Fichier WebStorm
 .idea

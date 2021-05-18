@@ -21,7 +21,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(fileUpload({
-  debug: false
+  debug: false,
+  tempFileDir: './tmp/'
 }))
 
 
@@ -29,7 +30,22 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use("/public",express.static(path.join(__dirname, 'public')));
+
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+    return res.status(200).json({});
+  }
+  next();
+});
+
 
 app.use('/', indexRouter);
 app.use('/artiste' , artisteRouter)
@@ -37,6 +53,7 @@ app.use('/users', usersRoute)
 app.use('/theme',themeRouter)
 app.use('/gameImage', gameImageRouter)
 app.use('/image', imageRouter)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

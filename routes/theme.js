@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const model = require('../model/Model')
+const file_manager = require('../Class/FileManager')
 
 
 router.use( (req,res,next) => {
@@ -35,6 +36,7 @@ router.post('/', (req, res) => {
     let name = req.body.nom
     if (name === '') return res.sendStatus(400)
     model.insertTheme(name).then((id) => {
+        file_manager.createDir("./public/images/Theme/"+name)
         res.status(201).json({
             id_theme: id
         })
