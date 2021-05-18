@@ -23,6 +23,7 @@ class FileManager{
                     entry.autodrain()
                 }))
                 .on('finish' , () => {
+                    fs.rmSync(zipFilePath)
                     resolve()
                 })
 
