@@ -1,0 +1,24 @@
+.main {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    overflow-y: hidden;
+}
+
+
+
+.loginBox{
+    background-color: #565F70;
+    width: 25%;
+    height: 25%;
+    overflow-y: hidden;
+}
+
+.card-body{
+    background-color: #565F70;
+}
