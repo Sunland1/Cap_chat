@@ -37,7 +37,7 @@ class Model {
             to: email, // list of receivers
             subject: "Verify email", // Subject line
             text: "👻 Pour Valider votre compte clicker sur ce lien : " +
-                "http://localhost:3000/users/verifyEmail/"+id // Change the adress after deploiment
+                "http://localhost:8080/users/verifyEmail/"+id // Change the adress after deploiment
         });
 
         console.log("Message sent: %s", info.messageId);

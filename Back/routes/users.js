@@ -25,7 +25,7 @@ router.post('/register', ((req, res) => {
 }))
 
 
-router.get('/emailVerify/:id', (req, res) => {
+router.get('/verifyEmail/:id', (req, res) => {
     let id_usr = req.params.id
     model.verifyEmail(id_usr).then((row) => {
         if (row === undefined) {
