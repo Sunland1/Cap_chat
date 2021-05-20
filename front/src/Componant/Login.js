@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/login.css"
-import { withRouter } from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {createUser, login} from '../action'
 import {connection} from '../api/connection'
@@ -50,8 +50,9 @@ class Login extends React.Component{
                                                this.setState({password: event.target.value})
                                            }}/>
                                 </div>
-                                <button type="submit" className="btn btn-primary">Submit</button>
+                                <button type="submit" className="btn btn-primary mr-5">Submit</button>
                             </form>
+                            <Link to='/register'>register</Link>
                         </div>
                     </div>
                 </div>
