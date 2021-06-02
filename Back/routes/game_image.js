@@ -24,6 +24,16 @@ router.get('/' , (req,res) => {
 })
 
 
+router.get('/:id' , (req,res) => {
+    let id_theme = req.params.id
+    model.getAllGameImageTheme(id_theme).then((data) => {
+        res.status(200).json(data)
+    }).catch( (err) => {
+        res.status(400).json(err)
+    })
+})
+
+
 router.post('/' , (req,res) => {
     let id_theme = req.body.id_theme
     let id_artiste = req.body.id_artiste

@@ -60,6 +60,7 @@ router.post("/login", (req, res) => {
             res.sendStatus(403)
         }
     }).catch((err) => {
+        console.log(err)
         res.status(400).json({
             err: "MISSING DATA"
         })

@@ -19,9 +19,14 @@ class Login extends React.Component{
 
     _loggin(event){
         connection(this.state.email,this.state.password).then( (user) => {
-            this.props.login()
-            this.props.createUser(user.id_usr,user.token)
-            this.props.history.push('/home')
+            if(!user){
+                alert("IDENTIFIANT INCORRECT")
+            }else{
+                this.props.login()
+                this.props.createUser(user.id_usr,user.token)
+                this.props.history.push('/home')
+            }
+
         })
         event.preventDefault()
 

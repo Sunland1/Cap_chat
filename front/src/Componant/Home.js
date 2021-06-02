@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import './css/login.css'
 
 
 
@@ -12,7 +13,10 @@ class Home extends React.Component{
 
     render(){
         return(
-            <p>{this.props.counter}</p>
+            <div className="main">
+                <h1>Bienvenue sur Cap'Chat !</h1>
+                <p>Ce cite a pour but de crée des cap'chat personnaliser</p>
+            </div>
         )
     }
 }

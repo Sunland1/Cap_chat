@@ -13,7 +13,7 @@ export async function connection(email,password){
         })
     })
 
-    return (await res).json()
+    return (await res).status === 400 ? false : (await res).json()
 }
 
 

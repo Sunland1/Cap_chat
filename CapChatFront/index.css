@@ -1,0 +1,100 @@
+@font-face {
+    font-family: Roboto,sans-serif;
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap')
+}
+
+.cadre{
+    margin: 2%;
+    padding: 1%;
+    display: flex;
+    background-color: #f9f9f9 ;
+    width: 250px;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+}
+
+
+.checkBox{
+    margin-top: 10px;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #c1c1c1;
+    border-radius: 2px;
+}
+
+.checkBox:hover{
+    box-shadow: inset 0px 1px 1px rgba(0,0,0,0.2);
+}
+
+.text{
+    margin-left: 10px ;
+    font-family: Roboto, sans-serif;
+}
+
+.card{
+    font-family: Roboto, sans-serif;
+    background-color: #f9f9f9 ;
+    border: 1px solid #d3d3d3;
+    height: 550px;
+    width: 400px;
+}
+
+.card .header p {
+    color: white;
+    font-weight: bold;
+}
+
+.header{
+    padding: 2%;
+    border: 5px solid white;
+    background-color: #4285F4;
+}
+
+
+.body{
+    padding: 1%;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+.visible{
+    visibility: visible;
+}
+
+img{
+    width: 125px;
+    height: 125px;
+}
+
+img:hover{
+    opacity: 0.8;
+}
+
+.footer{
+    display: flex;
+    padding: 1%;
+}
+
+.chrono{
+    width: 30px;
+    height: 30px;
+    margin-left: 12%;
+}
+
+
+.button{
+    margin-left: 50%;
+    padding: 1%;
+    border-radius: 2px;
+    border: none;
+    background-color: #4285F4;
+    color: white;
+    font-weight: bold;
+    height: 30px;
+}
+
+.button:hover{
+    opacity: 0.3;
+}

@@ -10,6 +10,12 @@ export const login = () => {
     }
 }
 
+export const logOut = () => {
+    return {
+        type: "LOG_OUT"
+    }
+}
+
 
 
 export const createUser = (id_usr,token) => {
