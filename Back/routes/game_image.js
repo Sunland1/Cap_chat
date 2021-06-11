@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
 const model = require('../model/Model')
+const file_manager = require('../Class/FileManager')
 
 
 router.use( (req,res,next) => {
     let token = req.headers['authorization']
-
     if(token == null ) return res.sendStatus(401)
     model.verifyToken(token,(err,user) => {
         if (err) return res.sendStatus(403)
@@ -39,13 +39,19 @@ router.post('/' , (req,res) => {
     let id_artiste = req.body.id_artiste
     let nom = req.body.nom
 
-
-    model.insertGameImage(id_theme,id_artiste,nom).then(() => {
-        res.sendStatus(201)
-    }).catch((err) => {
-        res.status(400).json(err)
+    model.getTheme(id_theme).then( (data) => {
+        model.insertGameImage(id_theme,id_artiste,nom).then((id) => {
+            file_manager.createDir("./public/images/Theme/"+data[0].nom+"/"+nom)
+            res.status(201).json({
+                id_jeux: id
+            })
+        }).catch((err) => {
+            console.log(err)
+            res.status(400).json(err)
+        })
     })
-})
+
+    })
 
 
 router.patch('/:id' , (req,res) => {

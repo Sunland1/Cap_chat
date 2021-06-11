@@ -13,7 +13,9 @@ class GenerateCapChat extends React.Component{
         this.user = this.props.user
         this.state = {
             dataGameImage: [],
-            themeData: []
+            themeData: [],
+            iframe: "",
+            urlSite: ""
         }
     }
 
@@ -59,6 +61,9 @@ class GenerateCapChat extends React.Component{
             ligne.push(
                 <tr>
                     {this._columGen(data[i])}
+                    <td>
+                        <button className="btn btn-primary" onClick={() => {this._generateCapaChat(data[i].id_jeux)}}>Generate</button>
+                    </td>
                 </tr>
             )
         }
@@ -80,9 +85,15 @@ class GenerateCapChat extends React.Component{
     }
 
 
+    _generateCapaChat(id_jeux){
+
+        this.setState({iframe: "<iframe token='"+this.state.urlSite+"' src='http://localhost:8080/capchat/"+id_jeux+"'></iframe>"})
+    }
+
 
     render(){
         return(
+
             <div className="main1">
                 <h1>Selectionner un themes</h1>
                 <select style={{width: "25%"}} className="form-control"
@@ -90,12 +101,14 @@ class GenerateCapChat extends React.Component{
                     <option value="all">Selectione un Theme</option>
                     {this._optionThemeGen()}
                 </select>
+                <p>URL :</p>
+                <input type="text" onChange={(event) => {this.setState({urlSite: event.target.value})}}/>
                 <table className="table table-success table-striped mt-5">
                     <thead>
                     <tr>
-                        <th scope="col">id_artiste</th>
                         <th scope="col">id_jeux</th>
                         <th scope="col">id_theme</th>
+                        <th scope="col">id_id_artiste</th>
                         <th scope="col">Nom</th>
                     </tr>
                     </thead>
@@ -103,6 +116,8 @@ class GenerateCapChat extends React.Component{
                         {this._rowGen()}
                     </tbody>
                 </table>
+
+                {this.state.iframe}
             </div>
         )
     }

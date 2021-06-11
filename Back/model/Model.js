@@ -166,6 +166,15 @@ class Model {
         })
     }
 
+    static getTheme(id){
+        return new Promise((resolve,reject) => {
+            connection.query('SELECT * FROM Theme WHERE id_theme=?',[id],(err,rows) => {
+                if(err) reject(err)
+                resolve(rows)
+            })
+        })
+    }
+
     static getAllGameImageTheme(id){
         return new Promise((resolve,reject) => {
             connection.query('SELECT Theme.id_theme as id_theme,JI.id_jeux,Theme.nom as nom_theme,JI.nom as nom_jeux\n' +
@@ -223,9 +232,9 @@ class Model {
     static insertGameImage(id_theme,id_artiste,nom){
         return new Promise((resolve,reject) => {
             connection.query('INSERT INTO JeuxImage (id_theme,id_artiste,nom) VALUES (?,?,?)',[id_theme,id_artiste,nom],
-                (err) => {
-                    if(err) reject(err)
-                    resolve()
+                (err,row) => {
+                    if(err || row === undefined) reject(err)
+                    else resolve(row.insertId)
                 }
             )
         })
@@ -267,6 +276,26 @@ class Model {
 
 
     //<-------------------- Image Section ----------------------------------->
+    static getAllImageNeutral(id_jeux){
+        return new Promise((resolve,reject) => {
+            connection.query('SELECT id_neutre as id,id_jeux,url,path FROM ImageNeutre WHERE id_jeux=?' , [id_jeux] , (err,row) => {
+                if(err) reject(err)
+                resolve(row)
+            })
+        })
+    }
+
+    static getAllImageSing(id_jeux){
+        return new Promise((resolve,reject) => {
+            connection.query('SELECT id_sing as id ,indice,url,path FROM ImageSinguliere WHERE id_jeux=?' , [id_jeux] , (err,rows) => {
+                if(err) reject(err)
+                resolve(rows)
+            })
+        })
+    }
+
+
+
     static insertNeutralImage(id_jeux,url,path){
         return new Promise((resolve,reject) => {
             connection.query('INSERT INTO ImageNeutre (id_jeux,url,path) VALUES (?,?,?)' , [id_jeux,url,path],
@@ -302,8 +331,20 @@ class Model {
         return new Promise((resolve,reject) => {
             connection.query('INSERT INTO ImageSinguliere (id_jeux,indice,url,path) VALUES (?,?,?,?)',
                 [id_jeux,indice,url,path],(err,row) => {
-                    if(err) console.log(err)
+                    if(err) reject(err)
                     resolve(row)
+                }
+            )
+        })
+    }
+
+
+    static verify(id_image,indice){
+        return new Promise((resolve, reject) => {
+            connection.query("SELECT * FROM ImageSinguliere WHERE id_sing=? AND indice=?" , [id_image,indice] ,
+                (err,row) => {
+                    if(err) reject(err)
+                    resolve(row.length !== 0)
                 }
             )
         })

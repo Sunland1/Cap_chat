@@ -1,10 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router,Route, Switch } from 'react-router-dom'
+
 import Login from "./Login";
 import Home from "./Home";
 import Nav from "./Nav";
 import Register from "./Register";
 import GenerateCapChat from "./GenerateCapChat";
+import Create from "./Create";
 
 
 class Navigation extends React.Component {
@@ -23,6 +25,7 @@ class Navigation extends React.Component {
                 <Route path="/register" exact render={() => (<Register/>)}/>
                 <Route path="/home" exact render={() => (<Home/>)}/>
                 <Route path="/generate" exact render={() => (<GenerateCapChat/>)}/>
+                <Route path="/create" exact render={() => (<Create/>)}/>
             </Router>
         )
     }

@@ -13,6 +13,7 @@ var usersRoute = require('./routes/users');
 var themeRouter = require('./routes/theme');
 var gameImageRouter = require('./routes/game_image')
 var imageRouter = require('./routes/image')
+var capChatrouter = require('./routes/capchat')
 
 var app = express();
 
@@ -53,6 +54,7 @@ app.use('/users', usersRoute)
 app.use('/theme',themeRouter)
 app.use('/gameImage', gameImageRouter)
 app.use('/image', imageRouter)
+app.use('/capchat' , capChatrouter)
 
 
 // catch 404 and forward to error handler
@@ -67,6 +69,7 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
+  console.log(err)
   res.status(err.status || 500);
   res.render('error');
 });

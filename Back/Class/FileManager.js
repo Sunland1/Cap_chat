@@ -12,18 +12,19 @@ class FileManager{
         return new Promise((resolve,reject) => {
             fs.createReadStream('./tmp/'+zipFilePath).pipe(unzipper.Parse())
                 .pipe(etl.map( async entry => {
-                    if(entry.path.split('.')[1] === "jpg"){
+                    console.log(entry.path)
+                    /*if(entry.path.split('.')[1] === "jpg" || entry.path.split('.')[1] === "jpeg" || entry.path.split('.')[1] === "JPG"){
                         const content = await entry.buffer()
                         let currentPath = path.join(newPath+entry.path.split('/')[1].split(' ').join('_'))
-                        let url = "http://localhost:3000/"+currentPath.split('\\').join('/')
+                        let url = "http://localhost:8080/"+currentPath.split('\\').join('/')
                         model.insertNeutralImage(id_jeux,url,currentPath).then( () => {
                             fs.appendFileSync(currentPath,content)
                         }).catch( (err) => reject(err) )
-                    }
+                    }*/
                     entry.autodrain()
                 }))
                 .on('finish' , () => {
-                    fs.rmSync(zipFilePath)
+                    fs.rmSync("./tmp/"+zipFilePath)
                     resolve()
                 })
 
